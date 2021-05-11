@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+
+        body {
+            display: grid;
+            place-content: center;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .credits {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+        .hero {
+        // controlls the size of the cube!
+        --cube-size: 240px;
+
+
+        @media only screen and (max-width: 560px) {
+            --cube-size: 180px;
+        }
+        }
+
+        .env {
+            height: var(--cube-size);
+            width: var(--cube-size);
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotate(35.264deg) rotateY(-30deg) rotateX(35.264deg);
+        }
+
+        .shadow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: #000;
+            border-radius: 1.25%;
+            opacity: .25;
+            filter: blur(calc(var(--cube-size) * .1));
+            transform: translateZ(calc(var(--cube-size) * -1)) scale(.95);
+            will-change: transform;
+            transform-style: preserve-3d;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform: rotate(-90deg) rotateX(-90deg);
+            transform-style: preserve-3d;
+        }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #333;
+            font-size: 30px;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+        // hack to hide any gaps in the cube's edges. Color can be tweaked to match faces primary color
+        color: #333;
+            box-shadow: 0 0 1px .5px currentColor;
+        &--1 {
+             transform: translateY(calc(var(--cube-size) * -.5)) rotateX(90deg);
+         }
+        &--2 {
+             transform: translateZ(calc(var(--cube-size) * .5));
+         }
+        &--3 {
+             transform: translateY(calc(var(--cube-size) * .5)) rotateX(-90deg);
+         }
+        &--4 {
+             transform: translateZ(calc(var(--cube-size) * -.5)) rotateX(180deg);
+         }
+        &--5 {
+             transform: translateX(calc(var(--cube-size) * -.5)) rotateY(-90deg);
+         }
+        &--6 {
+             transform: translateX(calc(var(--cube-size) * .5)) rotateY(90deg);
+         }
+
+        img, svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        }
+
+    </style>
+    <script type="application/javascript">
+        const cube = document.querySelector('.cube');
+        const shadow = document.querySelector('.shadow');
+
+        const spin = 360;
+        const turn = 90;
+        const delay = 1;
+
+        gsap.timeline({ repeat: -1, defaults: { ease: 'power2.inOut', delay}})
+            .to(cube, { rotateX: `+=${(spin * -1) - turn}` })
+            .to([cube, shadow], {rotate: `+=${(spin * 4) + (turn * 2) }` })
+            .to(cube, {rotateY: `+=${(spin * 1) + (turn * 2) }`})
+            .to([cube, shadow], {rotate: `+=${(spin * -6) - (turn * 2) }` })
+            .to(cube, { rotateX: `+=${(spin * -2) - turn }`})
+            .to([cube, shadow], { rotate: `+=${(spin * 5) + (turn * 2) }` });
+    </script>
+</head>
+<body>
+<section class="hero">
+    <div class="env">
+        <div class="shadow"></div>
+        <div class="cube">
+            <div class="face face--1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600">
+                    <defs/>
+                    <g fill="none" fill-rule="nonzero">
+                        <path fill="#402640" d="M0 0v1600h300v-100h1000v100h300V0H0zm400 1400H300v-100h100v100zm200 0H500v-100h100v100zm300 0H700v-100h200v100zm200 0h-100v-100h100v100zm200 0h-100v-100h100v100zm200 100h-100v-300H200v300H100V100h1400v1400z"/>
+                        <path fill="#FDE04B" d="M1600 1600v-100h-100v100z"/>
+                        <path fill="#988631" d="M1515 1515h70v25h-45v20h20v-15h25v40h-70z"/>
+                        <path fill="#8B5F90" d="M600 1100H200V800H100v700h100v-300h400z"/>
+                        <path fill="#402640" d="M200 300v800h500V300H200zm400 700H300V400h300v600z"/>
+                        <path fill="#DF2564" d="M300 400h300v200H300z"/>
+                        <path fill="#333332" d="M300 600h100v200H300z"/>
+                        <path fill="#F7EF3C" d="M400 600v200H300v100h300V600z"/>
+                        <path fill="#FAC43D" d="M600 1000H300V900h300z"/>
+                        <path fill="#F8EACC" d="M300 1300h100v100H300zM500 1300h100v100H500z"/>
+                        <path fill="#8B5F90" d="M200 200h500v100H200zM1000 1100h400V800h100v700h-100v-300h-400z"/>
+                        <path fill="#AC75B3" d="M100 100v700h100V200h500v900H600v99h400v-99H900V200h500v600h100V100z"/>
+                        <path fill="#402640" d="M900 300v800h500V300H900zm100 100h300v600h-300V400z"/>
+                        <path fill="#DF2564" d="M1000 400h300v200h-300z"/>
+                        <path fill="#333332" d="M1200 600h100v200h-100z"/>
+                        <path fill="#F7EF3C" d="M1200 600v200h100v100h-300V600z"/>
+                        <path fill="#FAC43D" d="M1000 1000h300V900h-300z"/>
+                        <path fill="#F8EACC" d="M1200 1300h100v100h-100zM1000 1300h100v100h-100z"/>
+                        <path fill="#8B5F90" d="M900 200h500v100H900z"/>
+                        <path fill="#F8EACC" d="M700 1300h200v100H700z"/>
+                        <path fill="#9C7F9C" d="M300 1500h1000v100H300z"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="face face--2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600">
+                    <defs/>
+                    <g fill="none" fill-rule="nonzero">
+                        <path fill="#46162F" d="M1599 0H0v1600h1600L1599 0zM100 1500V100h1400v1400H100z"/>
+                        <path fill="#FDE04B" d="M1600 1600v-100h-100v100z"/>
+                        <path fill="#988631" d="M1515 1515h70v25h-45v20h20v-15h25v40h-70z"/>
+                        <path fill="#F06BA8" d="M100 100h1400v100H100z"/>
+                        <path fill="#D2237E" d="M200 1099h500v101H200zM900 1099h500v101H900z"/>
+                        <path fill="#46162F" d="M200 400h500v100H200z"/>
+                        <path fill="#DD2785" d="M500 500h100v200H500z"/>
+                        <path fill="#751747" d="M300 1300h200v200H300zM1100 1300h200v200h-200zM700 1300h200v200H700zM600 500v500H300V500H200v600h500V500z"/>
+                        <path fill="#F6EE3E" d="M500 700V500H300v400h300V700z"/>
+                        <path fill="#FAC43D" d="M300 900h300v100H300z"/>
+                        <path fill="#46162F" d="M900 400h500v100H900z"/>
+                        <path fill="#DD2785" d="M1000 500h100v200h-100z"/>
+                        <path fill="#751747" d="M1300 500v500h-300V500H900v600h500V500z"/>
+                        <path fill="#F6EE3E" d="M1100 700V500h200v400h-300V700z"/>
+                        <path fill="#FAC43D" d="M1000 900h300v100h-300z"/>
+                        <path fill="#EE3696" d="M100 200v1300h200v-200h200v200h200v-200h200v200h200v-200h200v200h200V200H100zm600 999H200V400h500v799zm700 0H900V400h500v799z"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="face face--3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600">
+                    <defs/>
+                    <g fill="none" fill-rule="nonzero">
+                        <path fill="#502F2B" d="M0 0v1600h500v-200h600v200h500V0H0zm1500 1500h-300v-200H400v200H100V100h1400v1400z"/>
+                        <path fill="#3F4040" d="M1000 600h100v100h-100z"/>
+                        <path fill="#7B3418" d="M700 900V200H200v700h500zM300 300h300v500H300V300z"/>
+                        <path fill="#FAA41A" d="M100 100v100h600v700H500v100h600V900H900V200h600V100H100z"/>
+                        <path fill="#DD8A27" d="M1000 300h300v300h-300z"/>
+                        <path fill="#3F4040" d="M500 700h100V500H500v200z"/>
+                        <path fill="#DD8A27" d="M1400 200v700h-300v100h400V200zM200 900V200H100v800h400V900z"/>
+                        <path fill="#F5EDB8" d="M500 500H300v300h300V700H500zM1100 600v100h-100v100h300V600z"/>
+                        <path fill="#FCC66C" d="M300 1100h1000v100H300z"/>
+                        <path fill="#7B3418" d="M200 1000v300h100v-200h1000v200h100v-300z"/>
+                        <path fill="#FDE04B" d="M1600 1600v-100h-100v100z"/>
+                        <path fill="#988631" d="M1515 1515h70v25h-45v20h20v-15h25v40h-70z"/>
+                        <path fill="#BF9C64" d="M500 1400v200h600v-200z"/>
+                        <path fill="#FAA41A" d="M1400 1300h-100v-100H300v100H200v-300H100v500h300v-200h800v200h300v-500h-100v300z"/>
+                        <path fill="#7B3418" d="M900 200v700h500V200H900zm400 600h-300V300h300v500z"/>
+                        <path fill="#DD8A27" d="M300 300v200h300V300z"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="face face--4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600">
+                    <defs/>
+                    <g fill="none">
+                        <path fill="#C1272D" d="M500 500h99.5v200H500z"/>
+                        <path fill="#D6CDA0" d="M300 400h300v100H300z"/>
+                        <path fill="#405526" d="M700 400V300H200v600h400V799H300V400z"/>
+                        <path fill="#F5EDB8" d="M500 700V500H300v300h300V700z"/>
+                        <path fill="#CBCC33" d="M200 1100V100H99v1200h101v100h200v-300z"/>
+                        <path fill="#5A7B37" d="M200 1400v-100H99v200h301v-100z"/>
+                        <path fill="#CBCC33" d="M500 1200h100v100H500z"/>
+                        <path fill="#F3F3F4" d="M600 1200h100v100H600z"/>
+                        <path fill="#C1272D" d="M1000.5 500h99.5v200h-99.5z"/>
+                        <path fill="#F2EC42" d="M800 200H700v700h200V200z"/>
+                        <path fill="#E0E327" d="M800 100H200v100h1200V100z"/>
+                        <path fill="#D6CDA0" d="M1000 400h300v100h-300z"/>
+                        <path fill="#405526" d="M900 400V300h500v600h-400V799h300V400z"/>
+                        <path fill="#F5EDB8" d="M1100 700V500h200v300h-300V700z"/>
+                        <path fill="#CBCC33" d="M1400 1100V100h101v1200h-101v100h-200v-300z"/>
+                        <path fill="#5A7B37" d="M1400 1400v-100h101v200h-301v-100z"/>
+                        <path fill="#CBCC33" d="M1000 1200h100v100h-100z"/>
+                        <path fill="#5A7B37" d="M800 1300H500v100h600v-100z"/>
+                        <path fill="#F3F3F4" d="M900 1200h100v100H900z"/>
+                        <path fill="#CBCC33" d="M800 1200H700v100h200v-100z"/>
+                        <path fill="#E0E327" d="M1000 900v100H600V900H200v200h200v400h800v-400h200V900h-400zm100 500H500v-200h600v200z"/>
+                        <path fill="#5A7B37" d="M200 200h500v100H200zm700 0h500v100H900zm0 700H700V400H600v600h400V400H900z"/>
+                        <path fill="#405526" d="M800 0H0v1600h1600V0H800zm700 1500H100V100h1400v1400z"/>
+                        <path fill="#FDE04B" d="M1600 1600v-100h-100v100z"/>
+                        <path fill="#988631" d="M1515 1515h70v25h-45v20h20v-15h25v40h-70z"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="face face--5">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600">
+                    <defs/>
+                    <g fill="none" fill-rule="nonzero">
+                        <path fill="#397EB9" d="M900 200h500v100H900z"/>
+                        <path fill="#28313A" d="M900 300v800h500V300H900zm100 100h300v600h-300V800h100V600h-100V400z"/>
+                        <path fill="#4679A9" d="M1000 400h300v100h-300z"/>
+                        <path fill="#305678" d="M1000 500h300v100h-300z"/>
+                        <path fill="#F5F077" d="M1100 800V600h200v400h-300V800z"/>
+                        <path fill="#377FB9" d="M1100 1300v-200h300v-100h100v500h-200v-100h-300v-100z"/>
+                        <path fill="#397EB9" d="M200 200h500v100H200z"/>
+                        <path fill="#28313A" d="M200 300v800h500V300H200zm400 400H500v100h100v200H300V400h300v300z"/>
+                        <path fill="#4679A9" d="M300 400h300v200H300z"/>
+                        <path fill="#305678" d="M300 600h300v100H300z"/>
+                        <path fill="#F5F077" d="M500 800V700H300v300h300V800z"/>
+                        <path fill="#377FB9" d="M500 1300v-200H200v-100H100v500h200v-100h300v-100z"/>
+                        <path fill="#262D35" d="M0 0v1600h400v-100h800v100h400V0H0zm1500 1500h-200v-100H300v100H100V100h1400v1400z"/>
+                        <path fill="#5F9ED3" d="M100 100v900h100V200h500v100h200V200h500v800h100V100z"/>
+                        <path fill="#25537E" d="M900 1200v100H700v-100H500v100h100v100h400v-100h100v-100z"/>
+                        <path fill="#89BAE2" d="M900 1100V300H700v800H500v100h200v100h200v-100h200v-100z"/>
+                        <path fill="#FDE04B" d="M1600 1600v-100h-100v100z"/>
+                        <path fill="#988631" d="M1515 1515h70v25h-45v20h20v-15h25v40h-70z"/>
+                        <path fill="#7A7775" d="M400 1500h800v100H400z"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="face face--6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600">
+                    <defs/>
+                    <g fill="none" fill-rule="nonzero">
+                        <path fill="#134252" d="M0 0v1600h600v-100h400v100h600V0H0zm1500 1500h-400v-100H500v100H100V100h1400v1400z"/>
+                        <path fill="#40AECC" d="M1000 400h300v100h-300z"/>
+                        <path fill="#E37A25" d="M1000 600h100v100h-100z"/>
+                        <path fill="#FDE04B" d="M1600 1600v-100h-100v100z"/>
+                        <path fill="#988631" d="M1515 1515h70v25h-45v20h20v-15h25v40h-70z"/>
+                        <path fill="#40AECC" d="M300 400h300v100H300z"/>
+                        <path fill="#E37A25" d="M500 600h100v100H500z"/>
+                        <path fill="#66CCE9" d="M800 100H100v100h1400V100z"/>
+                        <path fill="#78979F" d="M600 1500v100h400v-100z"/>
+                        <path fill="#368DA4" d="M1200 1200v100H400v-100H300v300h200v-100h600v100h200v-300z"/>
+                        <path fill="#1B5A7B" d="M1200 1100V900h-100v300H500V900H400v200H300v100h100v100h800v-100h100v-100z"/>
+                        <path fill="#134252" d="M900 300v600h500V300H900zm100 300h300v200h-300V600zm0-200h300v100h-300V400zM200 300v600h500V300H200zm400 500H300V600h300v200zm0-300H300V400h300v100z"/>
+                        <path fill="#F6EE3E" d="M500 700V600H300v200h300V700zM1100 700V600h200v200h-300V700z"/>
+                        <path fill="#368DA4" d="M100 200v700h100V300h500v300h200V300h500v600h100V200z"/>
+                        <path fill="#66CCE9" d="M900 900V600H700v300H500v300h600V900zM100 900v600h200v-400h100V900zM1500 900v600h-200v-400h-100V900z"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="credits">Check out the whole collection of Ghouls at <a href="https://ghoul.gg/" target="_blank">ghoul.gg</a></div>
+
+<!-- Test against <img> (opposed to <svg>) -->
+
+<!--  <section class="hero">
+  <div class="env">
+    <div class="shadow"></div>
+    <div class="cube">
+      <div class="face face--1">
+        <img src="https://assets.codepen.io/107420/GHOUL-ADAM-1.svg" />
+      </div>
+      <div class="face face--2">
+        <img src="https://assets.codepen.io/107420/GHOUL-EVE-2.svg" />
+      </div>
+      <div class="face face--3">
+        <img src="https://assets.codepen.io/107420/GHOUL-UMM-GHULAH-3.svg" />
+      </div>
+      <div class="face face--4">
+        <img src="https://assets.codepen.io/107420/GHOUL-LAZARI-4.svg" />
+      </div>
+      <div class="face face--5">
+        <img src="https://assets.codepen.io/107420/GHOUL-BOBBY-5.svg" />
+      </div>
+      <div class="face face--6">
+        <img src="https://assets.codepen.io/107420/GHOUL-KADATH-6.svg" />
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+</body>
+
+</html>

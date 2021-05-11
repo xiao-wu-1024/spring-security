@@ -1,0 +1,95 @@
+
+body {
+    display: grid;
+    place-content: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.credits {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.hero {
+// controlls the size of the cube!
+--cube-size: 240px;
+
+
+@media only screen and (max-width: 560px) {
+    --cube-size: 180px;
+}
+}
+
+.env {
+    height: var(--cube-size);
+    width: var(--cube-size);
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotate(35.264deg) rotateY(-30deg) rotateX(35.264deg);
+}
+
+.shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #000;
+    border-radius: 1.25%;
+    opacity: .25;
+    filter: blur(calc(var(--cube-size) * .1));
+    transform: translateZ(calc(var(--cube-size) * -1)) scale(.95);
+    will-change: transform;
+    transform-style: preserve-3d;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: rotate(-90deg) rotateX(-90deg);
+    transform-style: preserve-3d;
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    font-size: 30px;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+// hack to hide any gaps in the cube's edges. Color can be tweaked to match faces primary color
+color: #333;
+    box-shadow: 0 0 1px .5px currentColor;
+&--1 {
+     transform: translateY(calc(var(--cube-size) * -.5)) rotateX(90deg);
+ }
+&--2 {
+     transform: translateZ(calc(var(--cube-size) * .5));
+ }
+&--3 {
+     transform: translateY(calc(var(--cube-size) * .5)) rotateX(-90deg);
+ }
+&--4 {
+     transform: translateZ(calc(var(--cube-size) * -.5)) rotateX(180deg);
+ }
+&--5 {
+     transform: translateX(calc(var(--cube-size) * -.5)) rotateY(-90deg);
+ }
+&--6 {
+     transform: translateX(calc(var(--cube-size) * .5)) rotateY(90deg);
+ }
+
+img, svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+}
