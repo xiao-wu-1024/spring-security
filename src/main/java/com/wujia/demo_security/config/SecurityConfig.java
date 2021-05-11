@@ -23,6 +23,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        // 设置退出路径以及退出后返回的页面
+        httpSecurity.logout()
+                .logoutUrl("/test/out/login")
+                .logoutSuccessUrl("/error.html").permitAll();
+
         // 设置权限不足访问页面
         httpSecurity.exceptionHandling().accessDeniedPage("/error.html");
         httpSecurity.formLogin()

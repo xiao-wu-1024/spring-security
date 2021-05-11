@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/test")
 public class TestController {
 
+    @GetMapping("/out/login")
+    public String outLogin(){
+        log.info("-----退出登录-----");
+        return "out login";
+    }
+
     @PostMapping("/login")
     public String loginSecurity(){
         return "login Security";
